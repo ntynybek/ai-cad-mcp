@@ -18,7 +18,7 @@ def get_autocad_app():
         raise RuntimeError("Failed to connect to AutoCAD: {}".format(e))    
 
 @app.list_tools()
-async def list_tools() -> list[types.Tool]:
+async def handle_list_tools() -> list[types.Tool]:
     """List available tools."""
     return [
         types.Tool(
@@ -43,13 +43,12 @@ async def list_tools() -> list[types.Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {},
-                "required": [],
             },
         ),
     ]
 
 @app.call_tool()
-async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
+async def handle_call_tool(name: str, arguments: dict) -> list[types.TextContent]:
     """Processing tool calls from AI"""
     acad = get_autocad_app()
     doc = acad.ActiveDocument
@@ -58,13 +57,9 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
         x1, y1, z1 = arguments["x1"], arguments["y1"], arguments["z1"]
         x2, y2, z2 = arguments["x2"], arguments["y2"], arguments["z2"]  
 
-        # Create points through win32com
-        import pythoncom
-        ps = pythoncom.PyMakeBuffer(8 * 3)
-        # In AutoCAD ActiveX's method AddLine gets arrays of coordinates
-        # Simple option through COM'methods:
         pt1 = win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8, [x1, y1, z1]) 
         pt2 = win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8, [x2, y2, z2])
+  
         line = doc.ModelSpace.AddLine(pt1, pt2)
         doc.Regen(1)
         return [types.TextContent(type="text", text=f"Line created from ({x1}, {y1}, {z1}) to ({x2}, {y2}, {z2}). ID: {line.Handle}")]
@@ -79,7 +74,10 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
 async def main():
     """Main entry point for the server."""
     async with stdio_server(app) as (read_stream, write_stream):
-        await app.run(read_stream, write_stream, app.create_initialization_options())
+        await app.run(
+            read_stream, 
+            write_stream, 
+            app.create_initialization_options())
 
 if __name__ == "__main__":
     import asyncio
