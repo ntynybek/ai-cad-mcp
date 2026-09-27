@@ -2,6 +2,7 @@
 mcp_server_step1.py
 mcp_server_step2.py
 mcp_server_step3.py
+mcp_server_step4.py
 
 # Стандартный мусор для Python-проектов
 __pycache__/
