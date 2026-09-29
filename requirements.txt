@@ -1,4 +1,2 @@
-Plaintext 
-
 mcp[cli]>=2.2.0
 pywin32>=312
