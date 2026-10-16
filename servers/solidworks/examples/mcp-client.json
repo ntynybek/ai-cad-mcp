@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "solidworks-engineering": {
+      "command": "C:\\path\\to\\project\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\path\\to\\project\\tools\\serve.py",
+        "--config",
+        "C:\\path\\to\\project\\solidworks-mcp.local.toml"
+      ]
+    }
+  }
+}

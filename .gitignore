@@ -1,9 +1,18 @@
-# Тестовые/черновые скрипты — не нужны в репозитории
 test/
 settings.json
 
-# Стандартный мусор для Python-проектов
 __pycache__/
 *.pyc
-.venv/
 venv/
+.venv/
+*.py[cod]
+*.egg-info/
+
+.pytest_cache/
+.ruff_cache/
+.cache/
+
+/servers/solidworks/workspace/
+/servers/solidworks/solidworks-mcp.local.toml
+/servers/solidworks/dist/
+/servers/solidworks/build/

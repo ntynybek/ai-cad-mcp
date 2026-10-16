@@ -1,0 +1,16 @@
+# Copy to solidworks-mcp.local.toml; paths may be absolute or relative to this file.
+workspace = 'workspace'
+prog_id = 'SldWorks.Application'
+timeout_seconds = 120
+standard = 'ESKD'
+part_template = 'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\templates\gost-part.prtdot'
+assembly_template = 'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\templates\gost-assy.asmdot'
+drawing_template = 'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\templates\gost-part drw.drwdot'
+drawing_sheet_format = 'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\lang\russian\sheetformat\a3 - gost_sh1_land.slddrt'
+drawing_width_mm = 420
+drawing_height_mm = 297
+read_roots = ['C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025']
+library_roots = [
+  'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\weldment profiles',
+  'C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2025\design library',
+]
